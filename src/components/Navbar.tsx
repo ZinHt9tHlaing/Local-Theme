@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Moon, Menu, X, Sun } from "lucide-react";
-import { useTheme } from "../context/ThemeContext";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
+import { toggleTheme } from "../store/themeSlice";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme } = useSelector((state: RootState) => state.theme);
+  const dispatch = useDispatch<AppDispatch>();
 
   return (
     <nav className="backdrop-blur-md bg-white/70 shadow-sm py-3 sticky top-0 z-50 dark:bg-gray-900">
@@ -32,7 +35,7 @@ const Navbar = () => {
 
           <div className="flex items-center gap-4">
             <button
-              onClick={toggleTheme}
+              onClick={() => dispatch(toggleTheme())}
               className="p-2 bg-gray-400 cursor-pointer transition rounded-xl shadow-sm active:scale-90 duration-200 dark:bg-amber-300"
             >
               {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
@@ -58,7 +61,7 @@ const Navbar = () => {
           <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col gap-6 ">
             <div className="flex justify-between items-center ">
               <button
-                onClick={toggleTheme}
+                onClick={() => dispatch(toggleTheme())}
                 className="p-2 bg-gray-400 cursor-pointer transition rounded-xl shadow-sm active:scale-90 duration-200 dark:bg-amber-300"
               >
                 {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
