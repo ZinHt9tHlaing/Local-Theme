@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { Moon, Menu, X, Sun } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
-interface NavbarProps {
-  theme: string;
-  toggleTheme: () => void;
-}
-
-const Navbar = ({ theme, toggleTheme }: NavbarProps) => {
+const Navbar = () => {
   const [open, setOpen] = useState(false);
-  console.log("theme", theme);
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <nav className="backdrop-blur-md bg-white/70 shadow-sm py-3 sticky top-0 z-50 dark:bg-gray-900">
